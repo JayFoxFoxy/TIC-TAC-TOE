@@ -7,7 +7,7 @@ public class gameboard {
 		int[][] board = new int[3][3];
 		int move = 0;
 		int player = 0;
-		int winner = 0;
+		//int winner = 0;
 		int playerWin = 0;
 		
 		System.out.println("*****Game Board****\n");

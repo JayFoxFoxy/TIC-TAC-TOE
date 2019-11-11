@@ -9,13 +9,15 @@ public class main {
 		int option = 0;
 		int gamesPlayed = 0;
 	         
+		
+		
 		      do{
 		         
 		         option = Menu(gamesPlayed);
 		         
 		         switch(option){
 		         case 1:
-		            
+		        	  gameboard.main(args);
 		            break;
 		            
 		         case 2:
