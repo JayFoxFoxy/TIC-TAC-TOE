@@ -2,12 +2,11 @@ import java.util.*;
 
 public class gameboard {
 	
-	public static void main(String[] args) {
+	public static int main(String[] args, int games) {
 		
 		int[][] board = new int[3][3];
 		int move = 0;
 		int player = 0;
-		//int winner = 0;
 		int playerWin = 0;
 		
 		System.out.println("*****Game Board****\n");
@@ -41,6 +40,10 @@ public class gameboard {
 			System.out.println("The player O won the game!");
 		}
 	
+		
+		games = games + 1;
+		return games;
+		
 		}
 
 
@@ -54,19 +57,51 @@ public class gameboard {
 		for(int i = 0; i < 3; i++) {
 			//System.out.println(i+1);
 			for(int j = 0; j < 3; j++) {
-				if (check == 1) {
+				if (check == 1 && board[i][j] != 0) {
 					if(i+1 == 1) {
-						System.out.print("A " + board[i][j] + " "); 
+						if(board[i][j] == 1) {
+							System.out.print("A " + "X" + " "); 
+							check = 0;
+						}else {
+							System.out.print("A " + "O" + " "); 
+							check = 0;
+						}
+					}else if (i+1 == 2){
+						if(board[i][j] == 1) {
+							System.out.print("B " + "X" + " "); 
+							check = 0;
+						}else {
+							System.out.print("B " + "O" + " "); 
+							check = 0;
+						}
+					}else if (i+1 == 3){
+						if(board[i][j] == 1) {
+							System.out.print("C " + "X" + " "); 
+							check = 0;
+						}else {
+							System.out.print("C " + "O" + " "); 
+							check = 0;
+						}
+					}
+				}else if(check == 0 && board[i][j] != 0){
+					if(board[i][j] == 1) {
+						System.out.print("X" + " "); 
+					}else {
+						System.out.print("O" + " ");	
+					}
+				}else if(check == 1 && board[i][j] == 0) {
+					if(i+1 == 1) {
+						System.out.print("A " + "*" + " "); 
 						check = 0;
 					}else if (i+1 == 2){
-						System.out.print("B " + board[i][j] + " "); 
+						System.out.print("B " + "*" + " "); 
 						check = 0;
 					}else if (i+1 == 3){
-						System.out.print("C " + board[i][j] + " "); 
+						System.out.print("C " + "*" + " "); 
 						check = 0;
 					}
 				}else {
-					System.out.print(board[i][j] + " "); 
+					System.out.print("*" + " "); 
 				}
 			}
 			check = 1;
@@ -82,13 +117,13 @@ public class gameboard {
 		int row = 0;
 		int col = 0;
 		int cond = 0;
-		//int confirm = 0;
+		int confirm = 0;
 		
+		do {
 		do {
 		do {
 		System.out.println("\nInsert the letter that you want to play: ");
 		letter = myObj.nextLine();
-		//System.out.println(letter);
 		letter = letter.toUpperCase();
 		}while(!Arrays.asList("A", "B", "C").contains(letter));
 		
@@ -103,7 +138,6 @@ public class gameboard {
 		do {
 		System.out.println("\nInsert the number that you want to play: ");
 		col = myObj.nextInt();
-		//System.out.println(col);
 		}while(col != 1 && col != 2 && col != 3);
 		
 		prevMove(board, player, row, col);
@@ -111,14 +145,21 @@ public class gameboard {
 		System.out.println("\nIs this move correct? (digit 1 to continue)");
 		cond = myObj.nextInt();
 		
-		cond = confirmDuplicated(board, player, row, col);
+	
+		
 		
 		}while(cond != 1);
+		
+		confirm = confirmDuplicated(board, player, row, col);
+		
+		}while(confirm == 1);
 		
 		regMatrix(board, player, row, col);
 		
 		move = move + 1;
 		
+			//myObj.close();
+			
 			return move;
 		}
 	
@@ -131,7 +172,6 @@ public class gameboard {
 		
 		
 		for(int i = 0; i < 3; i++) {
-			//System.out.println(i+1);
 			for(int j = 0; j < 3; j++) {
 				if(i == row && j == col-1 && player == 1) {
 					if (check == 1) {
@@ -166,17 +206,17 @@ public class gameboard {
 			}else {
 				if (check == 1) {
 					if(i+1 == 1) {
-						System.out.print("A " + board[i][j] + " "); 
+						System.out.print("A " + "*" + " "); 
 						check = 0;
 					}else if (i+1 == 2){
-						System.out.print("B " + board[i][j] + " "); 
+						System.out.print("B " + "*" + " "); 
 						check = 0;
 					}else if (i+1 == 3){
-						System.out.print("C " + board[i][j] + " "); 
+						System.out.print("C " + "*" + " "); 
 						check = 0;
 					}
 				}else {
-					System.out.print(board[i][j] + " "); 
+					System.out.print("*" + " "); 
 				}
 			}
 			}
@@ -202,14 +242,14 @@ public class gameboard {
 		
 		int confirm = 0;
 		
-		if (board[row][col-1] != 0) {
-			confirm = 5;
-		}else {
-		confirm = 1;
-		}
 		
-		System.out.println("You cant play in a position already played!");
-		System.out.println("Choose another move!");
+		if (board[row][col-1] == 1 || board[row][col-1] == 2) {
+			confirm = 1;
+			System.out.println("You can't play in a position already played!");
+			System.out.println("Choose another move!");
+		}else {
+		confirm = 5;
+		}
 		
 		return confirm;
 		

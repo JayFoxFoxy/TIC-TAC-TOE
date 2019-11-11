@@ -5,11 +5,11 @@ public class main {
 	public static void main(String[] args) {
 		System.out.println("Welcome to the TIC-TAC-TOE game");
 		System.out.println("Please choose an option on the menu screen");
+		System.out.println();
 		
 		int option = 0;
 		int gamesPlayed = 0;
 	         
-		
 		
 		      do{
 		         
@@ -17,17 +17,16 @@ public class main {
 		         
 		         switch(option){
 		         case 1:
-		        	  gameboard.main(args);
+		        	  gamesPlayed = gameboard.main(args, gamesPlayed);
 		            break;
 		            
 		         case 2:
 		            break;
 		            
 		         case 3:
+		        	 gamesPlayed = 0;
 		            break;
 		    
-		         case 4:
-		            break;
 		                 
 		          case 5:
 		            break;
@@ -46,10 +45,8 @@ public class main {
 		      Scanner myObj = new Scanner(System.in);
 		      
 		      
-		      int gamePlayed = gamesPlayed;
-		      
 		      System.out.println("*****Menu*****\n");
-		      System.out.println("Total persons inside the Array: " +gamePlayed);
+		      System.out.println("Total games played: " +gamesPlayed);
 		      System.out.println("");
 		      System.out.println("1 - New Game");
 		      System.out.println("2 - ScoreBoard");
@@ -58,8 +55,10 @@ public class main {
 		      System.out.println("Choose an operation: ");
 		      int option = myObj.nextInt();
 		      
+		      //myObj.close();
 		      return option;
 		   }
+	   
 	
 	
 
